@@ -1,0 +1,42 @@
+<ng-template #paises let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Selección de país</h4>
+      <button type="button" class="close d-none" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <form autocomplete="off" #forma="ngForm">
+          <div class="form-group row">
+            <label class="col-2 col-form-label">País</label>
+            <div class="col-8">
+              <select class="custom-select" (change)="changePais($event)" 
+              name="paises" ngModel required #pais="ngModel">
+                <option value="" disabled>Elige un país</option>
+                <option *ngFor="let pais of lpaises" [ngValue]="pais.alpha2Code">{{pais.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="input-group col-md-8">
+              <button type="button" class="btn btn-outline-primary btn-block" (click)="setPais(forma)">
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!--<hr>
+      <pre>
+        Estado del formulario: {{forma.valid}}
+        Status: {{forma.status}}
+      </pre>
+      <pre>
+        {{forma.value | json}}
+      </pre>-->
+    </div>
+  </ng-template>
+  
+  <button #bpaises class="btn btn-lg btn-outline-primary d-none lanzapaises" (click)="open(paises)">Launch demo modal</button>

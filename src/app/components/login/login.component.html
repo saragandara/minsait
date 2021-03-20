@@ -1,0 +1,51 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Formulario de acceso</h4>
+      <button type="button" class="close d-none" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div *ngIf="hayerror" class="alert alert-danger">{{error}}</div>
+      <div>
+        <form autocomplete="off" [formGroup]="forma" (ngSubmit)="logIn()">
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Email</label>
+            <div class="col-8">
+              <input class="form-control" type="email" name="usuario"
+              formControlName="username" 
+              [class.is-invalid]="usernameInvalid">
+              <small *ngIf="usernameInvalid" class="text-danger">Campo obligatorio</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Contraseña</label>
+            <div class="col-8">
+              <input class="form-control" type="password" name="password"
+              formControlName="password"
+              [class.is-invalid]="passwordInvalid">
+              <small *ngIf="passwordInvalid" class="text-danger">Campo obligatorio</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="input-group col-md-8">
+              <button type="submit" class="btn btn-outline-primary btn-block">
+                Guardar
+              </button>
+            </div>
+          </div>
+        </form>
+        <small class="text-muted">Usuario: sara@minsait.com | Contraseña: 1234</small>
+      </div>
+      <hr>
+      <!--<pre>
+        Estado del formulario: {{forma.valid}}
+        Status: {{forma.status}}
+      </pre>
+      <pre>
+        {{forma.value | json}}
+      </pre>-->
+    </div>
+  </ng-template>
+<button #blogin id="blogin" class="btn btn-lg btn-outline-primary d-none lanzalogin" (click)="open(content)">Launch demo modal</button>
