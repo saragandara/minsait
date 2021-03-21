@@ -5,18 +5,18 @@
         </div>
         <div class="col-sm-12 col-md-4 text-center">
             <span *ngIf="haypais">
-                <a href="#">
+                <!--<span class="pointer" (click)="cambiaPais()">-->
                 <i class="fas fa-globe-europe"></i>&nbsp;{{nombrepais}}
-                &nbsp;&nbsp;<i class="far fa-edit"></i>
-                </a>
+                <!--&nbsp;&nbsp;<i class="far fa-edit"></i>
+                </span>-->
             </span>
         </div>
         <div class="col-sm-12 col-md-4 text-right">
             <span *ngIf="logged">
                 <i class="far fa-user pointer"></i>&nbsp;{{user}}
-                &nbsp;&nbsp;<i class="fas fa-sign-out-alt" (click)="logout()"></i>
+                &nbsp;&nbsp;
+                <a href="#" (click)="logout()"><i class="fas fa-sign-out-alt" ></i></a>
             </span>
-            <span *ngIf="!logged">no user</span>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ export class PaisesService {
   public nombrepais:string = "";
 
   constructor(private http: HttpClient) { 
-    console.log('Servicio paises');
+    //console.log('Servicio paises');
   }
 
   getPaises(){
@@ -30,61 +30,50 @@ export class PaisesService {
 
   getPais(){
     let resp = localStorage.getItem('currentPais');
-    console.log("Pais Service getPais... Pais: "+resp);
+    //console.log("Pais Service getPais... Pais: "+resp);
     if(resp==null) return resp="";
     return resp;
   }
 
   getNombrePais(){
-    let resp = localStorage.getItem('nombrePais');
+    /*let resp = localStorage.getItem('nombrePais');
     console.log("Pais Service getNombrePais... Nombrepais: "+resp);
-
     if(resp==null || resp=="") {
       this.buscaNombrePais();
       if(resp==null) return resp="";
     }
-
-    return resp;
+    return resp;*/
+    this.buscaNombrePais();
+    return this.nombrepais;
   }
 
   buscaNombrePais(){
-    console.log("BuscaNombrePais");
     let codigo = this.getPais();
     if(codigo!="" && codigo!=null) {
       this.http.get("https://restcountries.eu/rest/v2/alpha/"+codigo).subscribe(
         (data:any) => {
-          console.log(data);
+          //console.log(data);
           this.nombrepais=data.name;
-          console.log(".. name: "+data.name);
+          //console.log(".. name: "+data.name);
         }
       );
+
+      //console.log("BuscaNombrePais... pais: "+codigo+", nombrepais: "+this.nombrepais);
+      if(this.nombrepais==null) this.nombrepais="";
+      else this.setNombrePais(this.nombrepais);
     }
-    if(this.nombrepais==null) this.nombrepais="";
-    else this.setNombrePais(this.nombrepais);
   }
 
   setNombrePais(pais:string){
     localStorage.setItem('nombrePais', pais);
   }
 
-  /*setUserLoggedIn(user:string) {
-    this.isUserLoggedIn = true;
-    localStorage.setItem('currentUser', user);
+  removePais() {
+    //localStorage.clear();
+    localStorage.removeItem("nombrePais");
+    localStorage.removeItem("nombrepais");
+    localStorage.removeItem("currentPais");
+    let resp = localStorage.getItem('currentPais');
+    console.log("Pais Service removePais... Pais: "+resp);
   }
-
-  checkLogin(){
-    let user = this.getUserLoggedIn();
-    if ( user == null ) this.goToLogin();
-  }
-
-  getUserLoggedIn() {
-    let resp = localStorage.getItem('currentUser');
-    //console.log("User Service getUserLoggedIn... Usuario: "+resp);
-    if(resp==null) return resp="";
-    return resp;
-  }
-
-  removeUserLoggedIn() {
-    localStorage.clear();
-  }*/
 }

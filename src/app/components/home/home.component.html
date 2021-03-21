@@ -1,5 +1,12 @@
 <div id="home">
-<ul>
-    <li *ngFor="let pais of paises">{{pais.name}}</li>    
-</ul>
+    <h1>En Cartelera <span *ngIf="pais">en {{nombrepais}}</span></h1>
+    <p *ngIf="!pais">No hay ningún país seleccionado, no se puede cargar la cartelera</p>
+    <div *ngIf="pais">
+        <div *ngIf="peliculas.length>0">
+            <app-poster-grid [peliculas]="peliculas"></app-poster-grid>
+        </div>
+        <div *ngIf="peliculas.length==0">
+            No hay resultados disponibles para este país.
+        </div>
+    </div>
 </div>

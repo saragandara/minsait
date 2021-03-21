@@ -17,10 +17,10 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { HomeComponent } from './components/home/home.component';
-import { EquiposComponent } from './components/equipos/equipos.component';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { LoginComponent } from './components/login/login.component';
 import { PaisesComponent } from './components/paises/paises.component';
+import { PosterGridComponent } from './components/poster-grid/poster-grid.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +29,11 @@ import { PaisesComponent } from './components/paises/paises.component';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    EquiposComponent,
+    LoginComponent,
     EventosComponent,
     LoginComponent,
     PaisesComponent,
+    PosterGridComponent,
   ],
   imports: [
     BrowserModule,

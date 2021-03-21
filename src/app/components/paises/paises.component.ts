@@ -30,8 +30,7 @@ export class PaisesComponent implements OnInit {
     private userService: UserService,
     private paisesService: PaisesService
   ) { 
-    //this.crearFormulario();
-    console.log("PAISES constructor");
+    //console.log("PAISES constructor");
     this.abierto=false;
   }
 
@@ -43,7 +42,7 @@ export class PaisesComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    console.log("Paises ngAfterViewChecked...");
+    //console.log("Paises ngAfterViewChecked...");
     this.usuario=this.userService.getUserLoggedIn();
     this.pais=this.paisesService.getPais();
     //console.log("  Usuario: "+this.user);

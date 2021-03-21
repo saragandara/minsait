@@ -6,6 +6,7 @@ import {PaisesComponent} from '../../paises/paises.component';
 
 import {UserService} from '../../../services/user.service';
 import {PaisesService} from '../../../services/paises.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   public user: string = null;
   public nombrepais: string = null;
   public haypais: boolean = false;
+  public pais: string = "";
   
   @ViewChild(LoginComponent) mlogin: LoginComponent;
   @ViewChild(PaisesComponent) mpaises: PaisesComponent;
@@ -26,25 +28,29 @@ export class HeaderComponent implements OnInit {
     private router: Router, 
     private userService: UserService,
     private paisesService: PaisesService
-  ) { }
+  ) { 
+    this.haypais=false;
+  }
 
   ngOnInit(): void {
     
   }
 
   ngAfterViewChecked() {
-    console.log("Header ngAfterViewChecked...");
+    //console.log("Header ngAfterViewChecked...");
     this.user=this.userService.getUserLoggedIn();
-    //console.log("  Usuerio: "+this.user);
     if(this.user!="") this.logged=true;
     else this.logged=false;
 
-    console.log("  1 Nombre pais: "+this.nombrepais);
-    if(this.nombrepais=="" || this.nombrepais==null) {
-      this.nombrepais = this.paisesService.getNombrePais();
-      console.log("  2 Nombre pais: "+this.nombrepais)
-      this.haypais=false;
-      if(this.nombrepais!="") this.haypais=true;
+    //No se puede cambiar el pais
+    if(this.haypais==false) {
+      this.pais = this.paisesService.getPais();
+      if(this.pais==null) this.pais="";
+      if(this.pais!="") {
+        this.nombrepais = this.paisesService.getNombrePais();
+        if(this.nombrepais==null) this.nombrepais="";
+        if(this.nombrepais!="") this.haypais=true;
+      }
     }
   }
 
@@ -61,6 +67,10 @@ export class HeaderComponent implements OnInit {
     
     localStorage.clear();
     this.router.navigate(['/home']);
+  }
+
+  cambiaPais(){
+    this.paisesService.removePais();
   }
 
 }

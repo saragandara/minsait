@@ -1,0 +1,75 @@
+
+<div class="row">
+    <div [ngClass]="{'col-md-6':id, ' col-md-12':!id}">
+        <div class="row mt-4 mb-5 pointer">
+            <div class="col-md-3 mb-4" *ngFor="let pelicula of peliculas">
+                <img src="https://image.tmdb.org/t/p/w500{{pelicula.poster_path}}" 
+                    class="img-fluid poster" (click)="verActores(pelicula)">
+                <div class="row ml-1 mr-1">
+                    <div class="col-sm-10 font-weight-bold">{{pelicula.title}}</div>
+                    <div class="col-sm-2">{{pelicula.vote_average | number:'1.1'}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="detalle" class="col-md-6 mt-4" *ngIf="id">
+        <h2>{{titulo}} 
+            <small class="float-right pointer" (click)="cerrarDetalle()">
+                <i class="fas fa-times"></i></small>
+        </h2>
+        <h4>Sinopsis:</h4>
+        <p class="resumen">{{resumen}}</p>
+        <h4>Reparto:</h4>
+        <div *ngFor="let actor of actores; let i = index">
+            <p *ngIf="actor.name">
+                <span>{{actor.name}}</span>
+                <span class="pointer float-right" (click)="eliminar(i)"><i class="far fa-trash-alt"></i></span>
+            </p>
+        </div>
+        <div *ngIf="actores.length==0">
+            <p>No se han encontrado resultados.</p>
+        </div>
+        <button #baddactor class="btn btn-xs btn-outline-secondary addactor" 
+            (click)="open(addActor)"><i class="fas fa-plus"></i>&nbsp;Añadir</button>
+    </div>
+</div>
+
+
+<ng-template #addActor let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nuevo Actor</h4>
+      <button type="button" class="close d-none" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <form autocomplete="off" #forma="ngForm">
+            <div class="form-group row">
+              <label class="col-2 col-form-label">Nombre:</label>
+              <div class="col-8">
+                <input class="form-control" type="text" name="nombre" ngModel required 
+                    #nombre="ngModel">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label">&nbsp;</label>
+              <div class="input-group col-md-8">
+                <button type="button" class="btn btn-outline-primary btn-block"
+                (click)="anadir(nombre.value)">
+                  Guardar
+                </button>
+              </div>
+            </div>
+          </form>
+      </div>
+      <!--<hr>
+      <pre>
+        Estado del formulario: {{forma.valid}}
+        Status: {{forma.status}}
+      </pre>
+      <pre>
+        {{forma.value | json}}
+      </pre>-->
+    </div>
+  </ng-template>
