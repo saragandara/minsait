@@ -12,6 +12,8 @@ import {Pelicula} from '../../interfaces/cartelera-response';
 })
 export class EventosComponent implements OnInit {
 
+  public origen:string="";
+
   public pais:string = "";
   public nombrepais:string = "";
 
@@ -21,8 +23,8 @@ export class EventosComponent implements OnInit {
     private paisesService: PaisesService,
     private peliculasService: PeliculasService
   ) {
-
-    console.log("Constructor Eventos");
+    //console.log("Constructor Eventos");
+    this.origen="estrenos";
   }
 
   ngOnInit(): void {

@@ -26,9 +26,7 @@ export class HomeComponent implements OnInit {
     private paisesService: PaisesService,
     private peliculasService: PeliculasService
   ) {
-
-    console.log("Constructor home");
-
+    //console.log("Constructor home");
     this.pais = paisesService.getPais();
     if(this.pais!="") this.cargaCartelera();
   }

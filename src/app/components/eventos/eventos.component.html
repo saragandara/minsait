@@ -3,7 +3,7 @@
     <p *ngIf="!pais">No hay ningún país seleccionado, no se puede cargar la cartelera</p>
     <div *ngIf="pais">
         <div *ngIf="peliculas.length>0">
-            <app-poster-grid [peliculas]="peliculas"></app-poster-grid>
+            <app-poster-grid [peliculas]="peliculas" [origen]="origen"></app-poster-grid>
         </div>
         <div *ngIf="peliculas.length==0">
             No hay resultados disponibles para este país.

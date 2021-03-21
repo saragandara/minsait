@@ -15,6 +15,8 @@ import {Pelicula, DatosPelicula, Cast} from '../../interfaces/cartelera-response
 export class PosterGridComponent implements OnInit {
 
   @Input() peliculas: Pelicula[];
+  @Input() origen: string;
+
   public actores: Cast[];
   public id:number;
   public titulo:string;
@@ -31,10 +33,12 @@ export class PosterGridComponent implements OnInit {
     private peliculasService: PeliculasService
   ) {   
     this.id=0;
+    
   }
 
   ngOnInit(): void {
     //console.log(this.peliculas);
+    console.log(this.origen);
   }
 
   verActores(pelicula){
